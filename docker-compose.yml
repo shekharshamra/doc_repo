@@ -1,0 +1,18 @@
+version: "2"
+services:
+   tomcat:
+     container_name: tomcat
+     hostname: tomcat.com
+     volumes:
+      - /test:/test_shekhar
+     image: csharma4u/tomcat:v1.1 
+     ports: 
+         - "8080:8080"
+
+   apache:
+     container_name: httpd
+     hostname: httpd
+     image: csharma4u/apache:v1.0
+     ports: 
+         - "80:80"
+         - "443:443"
