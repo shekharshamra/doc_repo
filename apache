@@ -1,0 +1,9 @@
+FROM centos:7
+RUN yum install -y httpd
+RUN yum install -y elinks
+
+EXPOSE 80
+
+# Simple startup script to avoid some issues observed with container restart
+RUN rm -rf /run/httpd/* /tmp/httpd*
+CMD /usr/sbin/httpd -c "ErrorLog /dev/stdout" -DFOREGROUND
