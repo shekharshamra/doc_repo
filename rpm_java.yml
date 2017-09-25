@@ -1,0 +1,23 @@
+---
+ - hosts: client
+   tasks: 
+       - name: copying
+         copy:
+            src=/etc/ansible/playbook/jdk-8u144-linux-x64.rpm
+            dest=/tmp
+
+
+       - name: installing java
+         yum:
+            name: /tmp/jdk-8u144-linux-x64.rpm
+            state: present
+       
+       - name: defining java home
+         lineinfile:
+             dest: /etc/profile
+             state: present
+             line: '{{ item }}'
+         with_items:
+               - export JAVA_HOME=/usr/java/jdk1.8.0_144
+               - export PATH=$JAVA_HOME/bin:$PATH
+          
