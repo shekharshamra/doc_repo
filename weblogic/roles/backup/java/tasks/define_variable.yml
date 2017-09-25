@@ -1,0 +1,8 @@
+---
+ - lineinfile:
+     dest: /etc/profile
+     state: present
+     line: '{{ item }}'
+   with_items: 
+        - export JAVA_HOME=/usr/java/jdk-7u80-linux-x64
+        - export PATH=$JAVA_HOME/bin:$PATH

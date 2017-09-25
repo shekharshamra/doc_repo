@@ -1,0 +1,12 @@
+---
+ - group:
+       name: "{{group.groupname}}"
+   register: a
+   tags: test
+ - user: 
+       name: "{{user.username}}"
+       password: "{{user.password}}"
+       comment: "{{user.comment}}"
+       group: "{{user.group}}"
+       append: "{{user.append}}"
+#   when: a | changed

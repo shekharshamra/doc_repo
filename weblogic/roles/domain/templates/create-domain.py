@@ -1,0 +1,11 @@
+import os, sys
+readTemplate('/u02/opt/weblogic/wlserver/common/templates/wls/wls.jar')
+cd('/Security/base_domain/User/weblogic')
+cmo.setPassword('welcome1')
+cd('/Server/AdminServer')
+cmo.setName('AdminServer')
+cmo.setListenPort(7001)
+cmo.setListenAddress('localhost')
+writeDomain('/u02/opt/weblogic/domains/smsdev')
+closeTemplate()
+exit()

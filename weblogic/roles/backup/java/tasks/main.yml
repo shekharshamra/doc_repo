@@ -1,0 +1,23 @@
+---
+ - file:
+           path: /usr/java
+           state: directory
+           mode: 0775
+           owner: root
+ - copy:
+      src: /home/ec2-user/jdk-7u80-linux-x64.tar.gz 
+      dest: /usr/java
+
+ - unarchive:
+      src: /usr/java/jdk-7u80-linux-x64.tar.gz 
+      dest: /usr/java
+      remote_src: yes
+
+ - file: 
+      path: /usr/java
+      owner: root
+      group: root
+      mode: 777
+      recurse: yes
+             
+ - include: define_variable.yml

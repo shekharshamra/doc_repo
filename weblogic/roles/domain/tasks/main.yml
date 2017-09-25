@@ -1,0 +1,14 @@
+---
+ - name: copy create domain python script
+   template: src=create-domain.py dest={{ mw_installer_folder }} owner={{ oracle_user }} group={{ oracle_group }}
+ - name: Execute create domain script
+   shell: "{{ weblogic_home }}/common/bin/wlst.sh {{ mw_installer_folder }}/create-domain.py"
+   become: yes
+   become_user: weblogic
+
+ - name: copy weblogic startup script
+   template: src=start-weblogic.sh dest={{ mw_installer_folder }} owner={{ oracle_user }} group={{ oracle_group }} mode=777
+ - name: start weblogic server 
+   shell: '{{  mw_installer_folder }}/start-weblogic.sh'
+   become: yes
+   become_user: weblogic

@@ -1,0 +1,18 @@
+#create managed server
+connect('weblogic', 'welcome1', 't3://localhost:7001')
+edit()
+startEdit()
+cd('/')
+cmo.createServer('{{managed_server_name}}')
+cd('/Servers/' + '{{ managed_server_name }}')
+cmo.setListenAddress('localhost')
+cmo.setListenPort(7003)
+activate()
+startEdit()
+cmo.setListenPortEnabled(true)
+cmo.setJavaCompiler('javac')
+cmo.setClientCertProxyEnabled(false)
+cmo.setMachine(getMBean('/Machines/' + 'test'))
+cmo.setCluster(None)
+activate()
+

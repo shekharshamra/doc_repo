@@ -1,0 +1,26 @@
+---
+ - name: install JAVA    
+   copy:
+       src: jdk-7u80-linux-x64.tar.gz
+       dest: /u02/opt/java/
+       owner: weblogic
+       group: weblogic
+
+ - name: unarchiving java
+   unarchive:
+       src: /u02/opt/java/jdk-7u80-linux-x64.tar.gz
+       dest: /u02/opt/java/
+       remote_src: yes
+       owner: weblogic
+       group: weblogic
+   
+ - name: setting java home    
+   lineinfile:
+       dest: /etc/profile
+       state: present
+       line: '{{ item }}'
+   with_items:
+        - export JAVA_HOME=/u02/opt/java/jdk-7u80-linux-x64
+        - export PATH=$JAVA_HOME/bin:$PATH
+        
+           

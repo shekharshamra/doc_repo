@@ -1,0 +1,3 @@
+#inventory_loc='{{ oracle_base }}'
+inventory_loc=/u02/opt/installer/
+inst_group='{{ oracle_group }}'

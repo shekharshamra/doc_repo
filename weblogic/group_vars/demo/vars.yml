@@ -1,0 +1,4 @@
+---
+ apache: 
+      document_root: /etc/httpd/conf.d/shekhar
+      server_name: shekhar.example.com

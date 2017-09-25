@@ -1,0 +1,6 @@
+---
+ - user:
+       name: {{user.username}}
+       password: {{user.password}}
+       comment: {{user.comment}}
+       group: {{group.name}}

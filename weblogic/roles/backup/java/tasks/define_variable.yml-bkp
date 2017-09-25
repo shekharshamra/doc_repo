@@ -1,0 +1,5 @@
+---
+  - blockinfile:|
+      dest: /etc/profile
+      content: "export JAVA_HOME=/usr/java/jdk-7u80-linux-x64
+               export PATH=$JAVA_HOME/bin:$PATH"

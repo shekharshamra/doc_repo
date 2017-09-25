@@ -1,0 +1,9 @@
+---
+ - name: installing and configuring weblogic
+   hosts: client
+   roles: 
+       - jdk
+       - wls
+       - software
+       - domain
+       - managed_server

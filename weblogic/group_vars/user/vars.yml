@@ -1,0 +1,12 @@
+---
+  user:
+      username: test1
+      password: 12345
+      comment: test user
+      group: popo
+      append: yes
+      
+  group:
+       groupname: popo111
+          
+       
