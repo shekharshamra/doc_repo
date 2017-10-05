@@ -1,0 +1,7 @@
+---
+ - name: installing node js
+   hosts: client
+
+   roles:
+      - nodejs
+
