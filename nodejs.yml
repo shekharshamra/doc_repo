@@ -1,0 +1,28 @@
+---
+ - name: downloading nodejs
+   get_url:
+       url: https://nodejs.org/dist/v6.11.4/node-v6.11.4-linux-x64.tar.xz
+       dest: /tmp
+       mode: 0777
+ - name: creating user
+   user:
+     name: '{{username}}'
+     password: '{{password}}'
+ - name: unarchiving nodejs
+   unarchive:
+       src: /tmp/node-v6.11.4-linux-x64.tar.xz
+       dest: /tmp
+       owner: shekhar
+       group: shekhar
+       remote_src: yes
+
+ - name: export NPN HOME
+   lineinfile:
+       dest: "/home/shekhar/.bash_profile"
+       insertafter: "export PATH"
+       line: "PATH=$PATH:$HOME/.local/bin:$HOME/bin:/tmp/node-v6.11.4-linux-x64/bin"
+       state: present
+
+ - name: source profile
+   command: cd /home/shekhar/ && source .bash_profile
+
