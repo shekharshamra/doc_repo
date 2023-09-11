@@ -2,7 +2,7 @@ from github import Github
 from datetime import datetime, timedelta
 
 # Replace 'your_personal_access_token' with your GitHub personal access token
-access_token = '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'
+access_token = 'token'
 
 # Replace with the GitHub account owners username
 repo_owner = 'shekharshamra'
