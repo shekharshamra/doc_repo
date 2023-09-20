@@ -4,18 +4,19 @@ from datetime import datetime, timedelta
 # Replace 'your_personal_access_token' with your GitHub personal access token
 access_token = 'token'
 
-# Replace with the GitHub account owners username
+# Replace with the GitHub account owner's username
 repo_owner = 'shekharshamra'
 
 # Initialize the GitHub API client
 g = Github(access_token)
 
 # Define the age limit for branches (5 days)
-age_limit = timedelta(days=5)
+age_limit = timedelta(days=15)
 
 # Function to remove branches older than a specified age, except 'master'
 def remove_old_branches(repo):
     branches = repo.get_branches()
+    branches_deleted = False  # Flag to track if any branches were deleted
     for branch in branches:
         # Skip 'master' branch
         if branch.name == 'master':
@@ -27,8 +28,13 @@ def remove_old_branches(repo):
             print(f"Deleting branch '{branch.name}' in repository '{repo.full_name}' (last commit: {last_commit})")
             try:
                 repo.get_git_ref(f"heads/{branch.name}").delete()
+                branches_deleted = True  # Set the flag to True if a branch was deleted
             except Exception as e:
                 print(f"Error deleting branch '{branch.name}': {str(e)}")
+
+    # Print a message if no branches were deleted
+    if not branches_deleted:
+        print(f"No branches older than {age_limit} found in repository '{repo.full_name}'.")
 
 # Get all repositories for the specified GitHub account owner
 repos = g.get_user(repo_owner).get_repos()
