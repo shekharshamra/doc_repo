@@ -1,24 +1,21 @@
 from github import Github
-from datetime import datetime, timedelta
 
 # Replace 'your_personal_access_token' with your GitHub personal access token
-password = ''
+token = 'your_personal_access_token'
 
-# Replace with the GitHub account owner's username
-username = ''
+# Replace 'https://github.flipcart.com/api/v3' with your custom GitHub API base URL
+custom_base_url = 'https://github.flipcart.com/api/v3'
 
-# Initialize the GitHub API client
-#g = Github(access_token)
-g = Github(login_or_token=username, password=password, base_url="https://github.org.com/api/v3")
+# Initialize the GitHub API client with the custom base URL
+g = Github(login_or_token=token, base_url=custom_base_url)
 
 # Define the age limit for branches (15 days)
 age_limit = timedelta(days=15)
 
 # Function to remove branches older than a specified age, except 'master'
 def remove_old_branches(repo):
-    branches = repo.get_branches()
     branches_deleted = False  # Flag to track if any branches were deleted
-    for branch in branches:
+    for branch in repo.get_branches():
         # Skip 'master' branch
         if branch.name == 'master':
             continue
@@ -29,7 +26,8 @@ def remove_old_branches(repo):
             print(f"Deleting branch '{branch.name}' in repository '{repo.full_name}' (last commit: {last_commit})")
             try:
                 # Delete the branch using the GitHub API
-                repo.get_git_ref(f"heads/{branch.name}").delete()
+                branch.edit(protection=False)  # Disable branch protection
+                branch.delete()
                 branches_deleted = True  # Set the flag to True if a branch was deleted
             except Exception as e:
                 print(f"Error deleting branch '{branch.name}': {str(e)}")
@@ -39,9 +37,9 @@ def remove_old_branches(repo):
         print(f"No branches older than {age_limit} found in repository '{repo.full_name}'.")
 
 # List of specific repository names you want to target
-repo_names_to_delete_from = ['doc_repo']
+repo_names_to_delete_from = ['npe-serverclass-ds']
 
 # Iterate through the specific repositories and call the function to remove old branches for each
 for repo_name in repo_names_to_delete_from:
-    repo = g.get_repo(repo_name)  # Replace 'your_username' with your GitHub username
+    repo = g.get_repo(repo_name)
     remove_old_branches(repo)
