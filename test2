@@ -1,14 +1,24 @@
-import subprocess
+import os
 
-# Specify the URL of the GitHub repository you want to clone
-repo_url = "https://github.com/username/repo-name.git"  # Replace with your repository URL
+# Specify the base directory where you want to clone the repositories
+base_destination_path = "/monitor/backup1"
 
-# Specify the directory where you want to clone the repository
-destination_dir = "/path/to/destination"  # Replace with your desired destination directory
+# List of repositories to clone
+repositories = [
+    {"url": "https://user:token@github.com/user/github_test1.git", "name": "github_test1"},
+    {"url": "https://user:token@github.com/user/github_test2.git", "name": "github_test2"},
+    # Add more repositories as needed
+]
 
-# Run the git clone command
-try:
-    subprocess.check_output(["git", "clone", repo_url, destination_dir])
-    print(f"Repository cloned to {destination_dir}")
-except subprocess.CalledProcessError as e:
-    print(f"Error cloning repository: {e}")
+# Loop through the list of repositories and clone them
+for repo_info in repositories:
+    repo_url = repo_info["url"]
+    repo_name = repo_info["name"]
+    destination_path = os.path.join(base_destination_path, repo_name)
+    
+    # Construct the clone command
+    clone_command = f"git clone {repo_url} {destination_path}"
+    
+    # Execute the clone command
+    os.system(clone_command)
+    print(f"Repository '{repo_name}' cloned to '{destination_path}'")
