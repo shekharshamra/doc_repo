@@ -1,0 +1,48 @@
+import requests
+from datetime import datetime, timedelta
+
+# Replace with your GitHub username and personal access token
+username = "your_username"
+token = "your_personal_access_token"
+
+# List of repository names
+repository_names = ["repo1", "repo2", "repo3", "repo4"]
+
+# Define the threshold date (10 days ago)
+threshold_date = (datetime.now() - timedelta(days=10)).isoformat()
+
+# Loop through the specified repositories
+for repo_name in repository_names:
+    # GitHub API endpoint to list open pull requests
+    url = f"https://api.github.com/repos/{username}/{repo_name}/pulls?state=open"
+
+    headers = {
+        "Authorization": f"token {token}",
+        "Accept": "application/vnd.github.v3+json"
+    }
+
+    response = requests.get(url, headers=headers)
+
+    if response.status_code == 200:
+        pull_requests = response.json()
+        for pr in pull_requests:
+            pr_created_at = pr["created_at"]
+            if pr_created_at <= threshold_date:
+                pr_number = pr["number"]
+
+                # GitHub API endpoint to close a pull request
+                close_url = f"https://api.github.com/repos/{username}/{repo_name}/pulls/{pr_number}/update"
+
+                # JSON payload to close the pull request
+                close_payload = {
+                    "state": "closed"
+                }
+
+                close_response = requests.patch(close_url, headers=headers, json=close_payload)
+
+                if close_response.status_code == 200:
+                    print(f"Closed pull request #{pr_number} in repository {repo_name}")
+                else:
+                    print(f"Failed to close pull request #{pr_number} in repository {repo_name}")
+    else:
+        print(f"Failed to fetch pull requests for repository {repo_name}")
