@@ -1,1 +1,20 @@
+Chargeback automation has been released to production after thorough testing, with a dedicated pipeline for project managers to run and generate reports. This will greatly reduce manual effort and simplify their tasks
+
+"Automated chargeback reports to include app name, SLO, decommission status, and lifecycle stage, eliminating manual processing of 3,000+ rows monthly and this greatly improving project manager productivity."
+
+
+"HCP chargeback reports have been automated, enabling the kickoff of billing for the HCP environment, which had not been initiated until now."
+
+"Developed a program to automatically fetch IP and network details for over 25,000 servers across various environments, eliminating manual work and saving 1,250 human hours."
+
+"Successfully migrated RITM scrap automation from the PIE team to Operations, deployed it with multiple bug fixes, including enhancements like a color-coding schema."
+
+"Multiple projects, including SIE, OFE, and GOV ServiceNow instances, were added to the scrap automation as part of project enhancements. This has saved significant human hours by automating the creation of user stories, previously done manually by project managers."
+
+"Developed automation to monitor the Scrap project, sending email notifications if user story creation fails for any RITM. This has saved substantial human hours that project managers previously spent monitoring failures manually.
+
+"Developed automation to tag Rally features and disable the expedite feature in the Scrap project, significantly reducing the manual efforts required by project managers."
+
+"Enhanced the one-touch decommissioning process by automatically removing knowledge objects during decommissioning. This improvement will boost the operations team's performance by reducing the time spent on manually removing Splunk knowledge objects."
+
 
